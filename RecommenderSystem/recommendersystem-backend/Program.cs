@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using recommendersystem_backend.Data;
 using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
@@ -37,7 +39,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     })
     ;
 
+builder.Services.AddDbContext<MovieDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 var app = builder.Build();
+
+app.UseCors(policy => policy.AllowAnyHeader()
+.AllowAnyMethod()
+.SetIsOriginAllowed(origin => true)
+.AllowCredentials());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

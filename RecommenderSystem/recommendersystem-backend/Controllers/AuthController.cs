@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using recommendersystem_backend.Data;
 using recommendersystem_backend.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,48 +15,51 @@ namespace recommendersystem_backend.Controllers
     {
         public static User user = new User();
         private readonly IConfiguration _configuration;
+        private readonly MovieDbContext _movieDbContext;
 
-        public AuthController(IConfiguration configuration)
+        public AuthController(IConfiguration configuration, MovieDbContext movieDbContext)
         {
             _configuration = configuration;
+            _movieDbContext = movieDbContext;
         }
 
-        [HttpGet, Authorize]
-        public ActionResult<object> GetMe()
-        {
-            var userName = User?.Identity?.Name;
-            var userName2 = User.FindFirstValue(ClaimTypes.Name);
-            var role = User.FindFirstValue(ClaimTypes.Role);
-            return Ok(new { userName, userName2, role});
-        }
-
+        //Registration API
         [HttpPost("register")]
-        public async Task<ActionResult<User>> Register(UserDto request)
+        public async Task<ActionResult<User>> Register(UserRegister request)
         {
             CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            user.UserName = request.UserName;
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
+            var user = new User()
+            {
+                UserName = request.UserName,
+                Email = request.Email,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+            };
+
+            await _movieDbContext.Users.AddAsync(user);
+            await _movieDbContext.SaveChangesAsync();
 
             return Ok(user);
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login(UserDto request)
+        public async Task<ActionResult<string>> Login (UserDto request)
         {
-            //Check if user exists
-            if(user.UserName != request.UserName)
+            var user = await _movieDbContext.Users.FirstOrDefaultAsync(x => x.UserName == request.UserName);
+
+            if (user == null)
             {
                 return BadRequest("User not found.");
             }
 
-            if(!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
+            if (!VerifyPasswordHash(request.Password, user.PasswordHash, user.PasswordSalt))
             {
                 return BadRequest("Wrong password.");
             }
 
             string token = CreateToken(user);
+
             return Ok(token);
         }
 
