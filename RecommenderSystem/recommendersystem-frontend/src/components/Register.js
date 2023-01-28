@@ -1,12 +1,15 @@
-import React from "react";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { NavigationBar } from "./NavigationBar";
+import "../App.css";
 
 export const Register = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const api = "https://localhost:7074/api/Authenticate/register";
 
     const navigate = useNavigate();
 
@@ -45,72 +48,74 @@ export const Register = () => {
         e.preventDefault();
 
         if (IsValidate()) {
-            let regObj = { username, password, email };
-            // console.log(regObj);
-
-            fetch("https://localhost:7160/api/Auth/register", {
-                method: "POST",
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify(regObj),
-            })
+            axios
+                .post(api, {
+                    Username: username,
+                    Email: email,
+                    Password: password,
+                })
                 .then((res) => {
-                    toast.success("Registered successfully.");
+                    toast.success("User registered");
                     navigate("/login");
                 })
                 .catch((err) => {
-                    toast.error("Failed :" + err.message);
+                    toast.error("Login failed + err.message");
                 });
         }
     };
 
     return (
-        <div>
-            <div className="offset-lg-3 col-lg-6" style={{ marginTop: "100px" }}>
-                <form className="container" onSubmit={handlesubmit}>
-                    <div className="card">
-                        <div className="card-header">
-                            <h2>User Registration</h2>
-                        </div>
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <div className="form-group">
-                                        <label>
-                                            User Name <span className="errmsg">*</span>
-                                        </label>
-                                        <input value={username} onChange={(e) => setUsername(e.target.value)} className="form-control"></input>
+        <>
+            <NavigationBar />
+
+            <div>
+                <div className="offset-lg-3 col-lg-6" style={{ marginTop: "100px" }}>
+                    <form className="container" onSubmit={handlesubmit}>
+                        <div className="card">
+                            <div className="card-header">
+                                <h2>User Registration</h2>
+                            </div>
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-lg-6">
+                                        <div className="form-group">
+                                            <label>
+                                                User Name <span className="errmsg">*</span>
+                                            </label>
+                                            <input value={username} onChange={(e) => setUsername(e.target.value)} className="form-control"></input>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="col-lg-6">
-                                    <div className="form-group">
-                                        <label>
-                                            Email <span className="errmsg">*</span>
-                                        </label>
-                                        <input value={email} onChange={(e) => setEmail(e.target.value)} className="form-control"></input>
+                                    <div className="col-lg-6">
+                                        <div className="form-group">
+                                            <label>
+                                                Email <span className="errmsg">*</span>
+                                            </label>
+                                            <input value={email} onChange={(e) => setEmail(e.target.value)} className="form-control"></input>
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="col-lg-6">
-                                    <div className="form-group">
-                                        <label>
-                                            Password <span className="errmsg">*</span>
-                                        </label>
-                                        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control"></input>
+                                    <div className="col-lg-6">
+                                        <div className="form-group">
+                                            <label>
+                                                Password <span className="errmsg">*</span>
+                                            </label>
+                                            <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" className="form-control"></input>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div className="card-footer">
+                                <button type="submit" className="btn btn-dark">
+                                    Register
+                                </button>
+                                &nbsp; &nbsp;
+                                <Link className="btn btn-dark" to={"/login"}>
+                                    Login
+                                </Link>
+                            </div>
                         </div>
-                        <div className="card-footer">
-                            <button type="submit" className="btn btn-primary">
-                                Register
-                            </button>
-                            &nbsp; | &nbsp;
-                            <Link className="btn btn-danger" to={"/login"}>
-                                Back
-                            </Link>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
