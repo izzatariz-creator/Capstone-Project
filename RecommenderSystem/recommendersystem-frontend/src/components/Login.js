@@ -2,10 +2,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { NavigationBar } from "./NavigationBar";
+import "../App.css";
 
 export const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const api = "https://localhost:7074/api/Authenticate/login";
 
     const usenavigate = useNavigate();
 
@@ -15,29 +18,27 @@ export const Login = () => {
 
     const ProceedLoginusingAPI = (e) => {
         e.preventDefault();
+
         if (validate()) {
-            let inputobj = { username: username, password: password };
-            fetch("https://localhost:7160/api/Auth/login", {
-                method: "POST",
-                headers: { "content-type": "application/json" },
-                body: JSON.stringify(inputobj),
-            })
-                .then((res) => {
-                    return res.json();
+            axios
+                .post(api, {
+                    Username: username,
+                    Password: password,
                 })
-                .then((resp) => {
-                    console.log(resp);
-                    if (Object.keys(resp).length === 0) {
+                .then((res) => {
+                    console.log(res.data);
+                    if (Object.keys(res).length === 0) {
                         toast.error("Login failed, invalid credentials");
                     } else {
                         toast.success("Success");
                         sessionStorage.setItem("username", username);
-                        // sessionStorage.setItem("jwttoken", resp.jwtToken);
+                        sessionStorage.setItem("token", res.data.token);
+                        sessionStorage.setItem("role", res.data.role);
                         usenavigate("/");
                     }
                 })
                 .catch((err) => {
-                    toast.error("Login Failed due to :" + err.message);
+                    toast.error("Login failed, invalid credentials");
                 });
         }
     };
@@ -56,39 +57,42 @@ export const Login = () => {
     };
 
     return (
-        <div className="row">
-            <div className="offset-lg-3 col-lg-6" style={{ marginTop: "100px" }}>
-                <form onSubmit={ProceedLoginusingAPI} className="container">
-                    <div className="card">
-                        <div className="card-header">
-                            <h2>User Login</h2>
-                        </div>
-                        <div className="card-body">
-                            <div className="form-group">
-                                <label>
-                                    User Name <span className="errmsg">*</span>
-                                </label>
-                                <input value={username} onChange={(e) => setUsername(e.target.value)} className="form-control"></input>
+        <>
+            <NavigationBar />
+            <div className="row">
+                <div className="offset-lg-3 col-lg-6" style={{ marginTop: "100px" }}>
+                    <form onSubmit={ProceedLoginusingAPI} className="container">
+                        <div className="card">
+                            <div className="card-header">
+                                <h2>User Login</h2>
                             </div>
-                            <div className="form-group">
-                                <label>
-                                    Password <span className="errmsg">*</span>
-                                </label>
-                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control"></input>
+                            <div className="card-body">
+                                <div className="form-group">
+                                    <label>
+                                        User Name <span className="errmsg">*</span>
+                                    </label>
+                                    <input value={username} onChange={(e) => setUsername(e.target.value)} className="form-control"></input>
+                                </div>
+                                <div className="form-group">
+                                    <label>
+                                        Password <span className="errmsg">*</span>
+                                    </label>
+                                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control"></input>
+                                </div>
+                            </div>
+                            <div className="card-footer">
+                                <button type="submit" className="btn btn-dark">
+                                    Login
+                                </button>{" "}
+                                &nbsp; &nbsp;
+                                <Link className="btn btn-dark" to={"/register"}>
+                                    New User
+                                </Link>
                             </div>
                         </div>
-                        <div className="card-footer">
-                            <button type="submit" className="btn btn-primary">
-                                Login
-                            </button>{" "}
-                            &nbsp; | &nbsp;
-                            <Link className="btn btn-success" to={"/register"}>
-                                New User
-                            </Link>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 };

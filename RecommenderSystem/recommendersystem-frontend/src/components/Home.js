@@ -79,11 +79,13 @@ export const Home = () => {
 
                 {/* <div className="movieList">{movies.length === 0 ? <p className="warning">Sorry! No Movies Found</p> : movies.map((movie) => <MovieCard key={movie.id} {...movie} />)}</div> */}
 
-                <div className="movieList">
+                {/* <div className="movieList">
                     {movies.map((movie) => (
                         <MovieCard key={movie.id} {...movie} />
                     ))}
-                </div>
+                </div> */}
+
+                <div className="movieList">{movies.length === 0 ? <p className="warning">Sorry! No Movies Found</p> : movies.map((movie) => <MovieCard key={movie.id} {...movie} />)}</div>
             </div>
         </>
     );
