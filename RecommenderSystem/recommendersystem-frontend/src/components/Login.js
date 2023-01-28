@@ -8,6 +8,7 @@ import "../App.css";
 export const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [role, setRole] = useState("");
     const api = "https://localhost:7074/api/Authenticate/login";
 
     const usenavigate = useNavigate();
@@ -26,15 +27,23 @@ export const Login = () => {
                     Password: password,
                 })
                 .then((res) => {
-                    console.log(res.data);
                     if (Object.keys(res).length === 0) {
                         toast.error("Login failed, invalid credentials");
                     } else {
                         toast.success("Success");
                         sessionStorage.setItem("username", username);
                         sessionStorage.setItem("token", res.data.token);
-                        sessionStorage.setItem("role", res.data.role);
-                        usenavigate("/");
+                        sessionStorage.setItem("role", res.data.roles);
+
+                        setRole(res.data.roles);
+
+                        // console.log(res.data.roles);
+
+                        if (res.data.roles === "User") {
+                            usenavigate("/");
+                        } else {
+                            usenavigate("/admindashboard");
+                        }
                     }
                 })
                 .catch((err) => {
