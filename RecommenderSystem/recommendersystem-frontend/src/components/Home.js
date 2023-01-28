@@ -11,13 +11,24 @@ const API_IMG = "https://image.tmdb.org/t/p/w500/";
 
 const MovieCard = ({ title, poster_path, overview, vote_average }) => {
     //display card design
+
+    const getRatingColor = (rating) => {
+        if (rating >= 8) {
+            return "green";
+        } else if (rating >= 5) {
+            return "orange";
+        } else {
+            return "red";
+        }
+    };
+
     return (
         <div className="movieCard">
             <img src={poster_path ? API_IMG + poster_path : "https://placehold.co/1080x1580"} alt="Movie"></img>
 
             <div className="info">
                 <h3>{title}</h3>
-                <span>{vote_average}</span>
+                <span style={{ color: getRatingColor(vote_average) }}>{vote_average}</span>
             </div>
 
             <div className="overview">
@@ -76,14 +87,6 @@ export const Home = () => {
         <>
             <div>
                 <NavigationBar searchMovie={searchMovie} setSearchQuery={setSearchQuery} />
-
-                {/* <div className="movieList">{movies.length === 0 ? <p className="warning">Sorry! No Movies Found</p> : movies.map((movie) => <MovieCard key={movie.id} {...movie} />)}</div> */}
-
-                {/* <div className="movieList">
-                    {movies.map((movie) => (
-                        <MovieCard key={movie.id} {...movie} />
-                    ))}
-                </div> */}
 
                 <div className="movieList">{movies.length === 0 ? <p className="warning">Sorry! No Movies Found</p> : movies.map((movie) => <MovieCard key={movie.id} {...movie} />)}</div>
             </div>
