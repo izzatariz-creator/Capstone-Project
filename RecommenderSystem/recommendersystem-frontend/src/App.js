@@ -6,6 +6,8 @@ import { Home } from "./components/Home";
 import { ToastContainer } from "react-toastify";
 import { AdminDashboard } from "./components/AdminDashboard";
 import { AddUser } from "./components/AddUser";
+import { AddAdmin } from "./components/AddAdmin";
+import { AllUser } from "./components/AllUser";
 
 function App() {
     return (
@@ -18,6 +20,8 @@ function App() {
                     <Route path="/register" element={<Register />}></Route>
                     <Route path="/admindashboard" element={<AdminDashboard />}></Route>
                     <Route path="/adduser" element={<AddUser />}></Route>
+                    <Route path="/addadmin" element={<AddAdmin />}></Route>
+                    <Route path="/alluser" element={<AllUser />}></Route>
                 </Routes>
             </BrowserRouter>
         </div>

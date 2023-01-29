@@ -64,6 +64,7 @@ export const Home = () => {
                 const url = `${SEARCH_URL}&query=${query}`;
                 const res = await fetch(url);
                 const data = await res.json();
+                // console.log(data.total_results);
                 setMovies(data.results);
             } catch (e) {
                 console.log(e);
@@ -88,7 +89,15 @@ export const Home = () => {
             <div>
                 <NavigationBar searchMovie={searchMovie} setSearchQuery={setSearchQuery} />
 
-                <div className="movieList">{movies.length === 0 ? <p className="warning">Sorry! No Movies Found</p> : movies.map((movie) => <MovieCard key={movie.id} {...movie} />)}</div>
+                {movies.length > 0 ? (
+                    <div className="movieList">
+                        {movies.map((movie) => (
+                            <MovieCard key={movie.id} {...movie} />
+                        ))}
+                    </div>
+                ) : (
+                    <div className="movieList">{/* <p className="warning">Sorry! No Movies Found</p> */}</div>
+                )}
             </div>
         </>
     );

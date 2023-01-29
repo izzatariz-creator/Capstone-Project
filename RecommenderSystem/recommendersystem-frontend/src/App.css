@@ -314,6 +314,12 @@ nav form .search-data:focus {
         transform: translate(-50%, -50%);
     }
 }
+
+table {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 /* ------------------ Navigation Bar End ------------------ */
 
 /* ------------------ Form Start ------------------ */

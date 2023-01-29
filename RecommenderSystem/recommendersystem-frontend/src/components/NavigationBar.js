@@ -38,7 +38,7 @@ export const NavigationBar = ({ searchMovie, setSearchQuery }) => {
                                 <Link to="/login">Login</Link>
                             ) : (
                                 <span className="navSpan">
-                                    Welcome <b className="navB">{usernamedisplay}</b>
+                                    Welcome, <b className="navB">{usernamedisplay}</b>
                                 </span>
                             )}
                         </li>

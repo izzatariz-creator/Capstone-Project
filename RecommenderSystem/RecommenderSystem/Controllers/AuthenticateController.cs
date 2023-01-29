@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RecommenderSystem.Auth;
 using System.IdentityModel.Tokens.Jwt;
@@ -117,6 +118,14 @@ namespace RecommenderSystem.Controllers
             }
 
             return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+        }
+
+        [HttpGet]
+        [Route("user")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            return Ok(users);
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)

@@ -16,9 +16,17 @@ export const AdminDashboard = () => {
                     </button>
                 </Link>
                 <br></br>
-                <button type="button" class="btn btn-dark btn-lg btn-block">
-                    Add Admin
-                </button>
+                <Link to="/addadmin">
+                    <button type="button" class="btn btn-dark btn-lg btn-block">
+                        Add Admin
+                    </button>
+                </Link>
+                <br></br>
+                <Link to="/alluser">
+                    <button type="button" class="btn btn-dark btn-lg btn-block">
+                        All User
+                    </button>
+                </Link>
             </div>
         </>
     );
