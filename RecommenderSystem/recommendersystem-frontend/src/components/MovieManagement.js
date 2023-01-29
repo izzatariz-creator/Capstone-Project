@@ -97,6 +97,69 @@ export const MovieManagement = () => {
                     Load();
                 })
                 .catch((err) => {
+                    toast.error("Add failed" + err.message);
+                });
+        }
+    }
+
+    async function editMovie(movie) {
+        setTitle(movie.title);
+        setDescription(movie.description);
+        setMovieId(movie.movieId);
+        setGenre(movie.genre);
+        setRating(movie.rating);
+        setPosterId(movie.posterId);
+    }
+
+    async function deleteMovie(id) {
+        if (window.confirm("Are you sure you want to delete this movie?")) {
+            await axios
+                .delete("https://localhost:7074/api/Movie/DeleteMovie/" + id)
+                .then((res) => {
+                    toast.success("Movie deleted successfully");
+                    Load();
+                })
+                .catch((err) => {
+                    toast.error("Delete failed" + err.message);
+                });
+
+            setTitle("");
+            setDescription("");
+            setMovieId("");
+            setGenre("");
+            setRating("");
+            setPosterId("");
+            Load();
+        }
+    }
+
+    async function reset() {
+        setTitle("");
+        setDescription("");
+        setMovieId("");
+        setGenre("");
+        setRating("");
+        setPosterId("");
+    }
+
+    async function update(e) {
+        e.preventDefault();
+
+        if (IsValidate()) {
+            await axios
+                .patch("https://localhost:7074/api/Movie/UpdateMovie/" + movies.find((u) => u.movieId === movieId).movieId || movieId, {
+                    title: title,
+                    description: description,
+                    genre: genre,
+                    rating: rating,
+                    posterId: posterId,
+                    movieId: movieId,
+                })
+                .then((res) => {
+                    toast.success("Movie updated successfully");
+                    Load();
+                })
+                .catch((err) => {
                     toast.error("Login failed" + err.message);
                 });
         }
@@ -168,6 +231,14 @@ export const MovieManagement = () => {
                                     <button className="btn btn-primary mt-4" onClick={save}>
                                         Add Movie
                                     </button>
+                                    &nbsp; &nbsp;
+                                    <button className="btn btn-warning mt-4" onClick={update}>
+                                        Update Movie
+                                    </button>
+                                    &nbsp; &nbsp;
+                                    <button className="btn btn-dark mt-4" onClick={reset}>
+                                        Reset
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -202,11 +273,11 @@ export const MovieManagement = () => {
                             <td>{movie.genre}</td>
                             <td>{movie.rating}</td>
                             <td>
-                                <button type="button" className="btn btn-warning">
+                                <button type="button" className="btn btn-warning" onClick={() => editMovie(movie)}>
                                     Edit
                                 </button>
                                 &nbsp; &nbsp;
-                                <button type="button" className="btn btn-danger">
+                                <button type="button" className="btn btn-danger" onClick={() => deleteMovie(movie.movieId)}>
                                     Delete
                                 </button>
                             </td>
