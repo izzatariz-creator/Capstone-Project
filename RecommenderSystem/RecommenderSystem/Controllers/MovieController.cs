@@ -21,6 +21,7 @@ namespace RecommenderSystem.Controllers
         [Route("GetMovies")]
         public async Task<IEnumerable<Movie>> GetMovies()
         {
+            // get all movies from db and put to list
             return await _movieDbContext.Movies.ToListAsync();
         }
 
@@ -28,6 +29,7 @@ namespace RecommenderSystem.Controllers
         [Route("AddMovie")]
         public async Task<Movie> AddMovie(Movie objMovie)
         {
+            // add movie
             _movieDbContext.Movies.Add(objMovie);
             await _movieDbContext.SaveChangesAsync();
             return objMovie;
@@ -37,6 +39,7 @@ namespace RecommenderSystem.Controllers
         [Route("UpdateMovie/{id}")]
         public async Task<Movie> UpdateStudent(Movie objMovie)
         {
+            // update movie
             _movieDbContext.Entry(objMovie).State = EntityState.Modified;
             await _movieDbContext.SaveChangesAsync();
             return objMovie;
@@ -46,6 +49,7 @@ namespace RecommenderSystem.Controllers
         [Route("DeleteMovie/{id}")]
         public bool DeleteMovie(int id)
         {
+            // delete movie
             bool a = false;
             var movie = _movieDbContext.Movies.Find(id);
             if (movie != null)

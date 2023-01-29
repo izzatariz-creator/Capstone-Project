@@ -17,10 +17,12 @@ export const MovieManagement = () => {
 
     const navigate = useNavigate();
 
+    // load all data
     useEffect(() => {
         (async () => await Load())();
     }, []);
 
+    //using axios to get all movies from db
     async function Load() {
         axios
             .get(api)
@@ -33,6 +35,7 @@ export const MovieManagement = () => {
             });
     }
 
+    // form validation
     const IsValidate = () => {
         let isproceed = true;
         let errormessage = "Please enter this field:  ";
@@ -80,6 +83,7 @@ export const MovieManagement = () => {
         return isproceed;
     };
 
+    // function to add new movie
     async function save(e) {
         e.preventDefault();
 
@@ -102,6 +106,7 @@ export const MovieManagement = () => {
         }
     }
 
+    // function to edit movie
     async function editMovie(movie) {
         setTitle(movie.title);
         setDescription(movie.description);
@@ -111,6 +116,7 @@ export const MovieManagement = () => {
         setPosterId(movie.posterId);
     }
 
+    // function to delete movie
     async function deleteMovie(id) {
         if (window.confirm("Are you sure you want to delete this movie?")) {
             await axios
@@ -133,6 +139,7 @@ export const MovieManagement = () => {
         }
     }
 
+    // function to reset value inside form
     async function reset() {
         setTitle("");
         setDescription("");
@@ -142,6 +149,7 @@ export const MovieManagement = () => {
         setPosterId("");
     }
 
+    // function to update movie
     async function update(e) {
         e.preventDefault();
 

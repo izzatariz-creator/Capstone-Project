@@ -13,6 +13,7 @@ export const AddAdmin = () => {
 
     const navigate = useNavigate();
 
+    // Form validation
     const IsValidate = () => {
         let isproceed = true;
         let errormessage = "Please enter this field:  ";
@@ -44,9 +45,11 @@ export const AddAdmin = () => {
         return isproceed;
     };
 
+    // event triggered after user click on submit
     const handlesubmit = (e) => {
         e.preventDefault();
 
+        // using axios
         if (IsValidate()) {
             axios
                 .post(api, {

@@ -8,6 +8,7 @@ export const AllUser = () => {
     const [users, setUsers] = useState([]);
     const api = "https://localhost:7074/api/Authenticate/user";
 
+    // using axios to fetch all users from db
     useEffect(() => {
         axios
             .get(api)

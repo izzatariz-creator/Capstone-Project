@@ -10,8 +10,7 @@ const SEARCH_URL = BASE_URL + "/search/movie?" + API_KEY;
 const API_IMG = "https://image.tmdb.org/t/p/w500/";
 
 const MovieCard = ({ title, poster_path, overview, vote_average }) => {
-    //display card design
-
+    //determine the color of rating
     const getRatingColor = (rating) => {
         if (rating >= 8) {
             return "green";
@@ -22,6 +21,7 @@ const MovieCard = ({ title, poster_path, overview, vote_average }) => {
         }
     };
 
+    // display all movie card
     return (
         <div className="movieCard">
             <img src={poster_path ? API_IMG + poster_path : "https://placehold.co/1080x1580"} alt="Movie"></img>
@@ -46,6 +46,7 @@ export const Home = () => {
     const [movies, setMovies] = useState([]);
     const [query, setQuery] = useState([]);
 
+    //using axios to fetch movie from api
     useEffect(() => {
         const fetchMovies = async () => {
             const { data } = await axios.get(POPULARMOVIE_URL);
@@ -80,7 +81,7 @@ export const Home = () => {
         }
     };
 
-    //Function to set query
+    //Function to set search query
     const setSearchQuery = (e) => {
         setQuery(e.target.value);
     };

@@ -13,6 +13,7 @@ export const Register = () => {
 
     const navigate = useNavigate();
 
+    // form validation
     const IsValidate = () => {
         let isproceed = true;
         let errormessage = "Please enter this field:  ";
@@ -44,6 +45,7 @@ export const Register = () => {
         return isproceed;
     };
 
+    // register new user
     const handlesubmit = (e) => {
         e.preventDefault();
 

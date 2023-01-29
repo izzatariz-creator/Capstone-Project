@@ -13,6 +13,7 @@ export const Login = () => {
 
     const usenavigate = useNavigate();
 
+    // clear all session storage
     useEffect(() => {
         sessionStorage.clear();
     }, []);
@@ -52,6 +53,7 @@ export const Login = () => {
         }
     };
 
+    // form validation
     const validate = () => {
         let result = true;
         if (username === "" || username === null) {

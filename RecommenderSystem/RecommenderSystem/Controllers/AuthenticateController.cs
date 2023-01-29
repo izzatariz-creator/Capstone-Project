@@ -34,7 +34,9 @@ namespace RecommenderSystem.Controllers
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
+            // Find user via username
             var user = await _userManager.FindByNameAsync(model.Username);
+            // Checking password
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
                 var userRoles = await _userManager.GetRolesAsync(user);
@@ -52,6 +54,8 @@ namespace RecommenderSystem.Controllers
 
                 var token = GetToken(authClaims);
 
+                // return token, expiration, roles as response
+
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
@@ -66,20 +70,26 @@ namespace RecommenderSystem.Controllers
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
+
+            // find out if username already exists
             var userExists = await _userManager.FindByNameAsync(model.Username);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
+            // new object user creation
             IdentityUser user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username
             };
+
+            // assign password
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+            // assign roles -> user
             if (!await _roleManager.RoleExistsAsync(UserRoles.User))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
 
@@ -95,20 +105,25 @@ namespace RecommenderSystem.Controllers
         [Route("register-admin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
         {
+            // find out if username already exists
             var userExists = await _userManager.FindByNameAsync(model.Username);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
+            // new object user creation
             IdentityUser user = new()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
                 UserName = model.Username
             };
+
+            // assign password
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+            // assign roles -> admin
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
 
@@ -124,12 +139,14 @@ namespace RecommenderSystem.Controllers
         [Route("user")]
         public async Task<IActionResult> GetAllUsers()
         {
+            // get all users then put to list
             var users = await _userManager.Users.ToListAsync();
             return Ok(users);
         }
 
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
+            //generate JWT token
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
             var token = new JwtSecurityToken(
