@@ -14,19 +14,19 @@ export const AdminDashboard = () => {
                 <h3>User Management</h3>
                 <br></br>
                 <Link to="/adduser">
-                    <button type="button" className="btn btn-dark btn-lg btn-block">
+                    <button type="button" className="btn btn-dark btn-lg btn-block" style={{ width: "200px" }}>
                         Add User
                     </button>
                 </Link>
                 <br></br>
                 <Link to="/addadmin">
-                    <button type="button" className="btn btn-dark btn-lg btn-block">
+                    <button type="button" className="btn btn-dark btn-lg btn-block" style={{ width: "200px" }}>
                         Add Admin
                     </button>
                 </Link>
                 <br></br>
                 <Link to="/alluser">
-                    <button type="button" className="btn btn-dark btn-lg btn-block">
+                    <button type="button" className="btn btn-dark btn-lg btn-block" style={{ width: "200px" }}>
                         All User
                     </button>
                 </Link>
@@ -36,7 +36,7 @@ export const AdminDashboard = () => {
                 <h3>Movie Management</h3>
                 <br></br>
                 <Link to="/movie">
-                    <button type="button" className="btn btn-dark btn-lg btn-block">
+                    <button type="button" className="btn btn-dark btn-lg btn-block" style={{ width: "200px" }}>
                         Manage Movie
                     </button>
                 </Link>

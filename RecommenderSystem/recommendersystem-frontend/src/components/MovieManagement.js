@@ -264,9 +264,15 @@ export const MovieManagement = () => {
             <table className="table">
                 <thead className="table-dark">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Title</th>
-                        <th scope="col">Description</th>
+                        <th scope="col" style={{ width: "5%" }}>
+                            ID
+                        </th>
+                        <th scope="col" style={{ width: "25%" }}>
+                            Title
+                        </th>
+                        <th scope="col" style={{ width: "30%" }}>
+                            Description
+                        </th>
                         <th scope="col">Genre</th>
                         <th scope="col">Rating</th>
                         <th scope="col">Actions</th>
