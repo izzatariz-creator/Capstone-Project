@@ -8,6 +8,7 @@ import { AdminDashboard } from "./components/AdminDashboard";
 import { AddUser } from "./components/AddUser";
 import { AddAdmin } from "./components/AddAdmin";
 import { AllUser } from "./components/AllUser";
+import { MovieManagement } from "./components/MovieManagement";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/adduser" element={<AddUser />}></Route>
                     <Route path="/addadmin" element={<AddAdmin />}></Route>
                     <Route path="/alluser" element={<AllUser />}></Route>
+                    <Route path="/movie" element={<MovieManagement />}></Route>
                 </Routes>
             </BrowserRouter>
         </div>

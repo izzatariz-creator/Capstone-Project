@@ -50,6 +50,7 @@ export const Home = () => {
         const fetchMovies = async () => {
             const { data } = await axios.get(POPULARMOVIE_URL);
             setMovies(data.results);
+            console.log(data.results);
         };
 
         fetchMovies();

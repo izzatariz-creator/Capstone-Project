@@ -24,7 +24,10 @@ export const AllUser = () => {
         <>
             <NavigationBar />
 
-            <br />
+            <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+                <h1>All Users</h1>
+                <br></br>
+            </div>
 
             <table className="table">
                 <thead className="table-dark">
@@ -45,7 +48,7 @@ export const AllUser = () => {
                 </tbody>
             </table>
 
-            <div class="d-flex flex-column align-items-center justify-content-center mt-5">
+            <div className="d-flex flex-column align-items-center justify-content-center mt-5">
                 <br></br>
                 <Link to="/admindashboard">
                     <button type="button" class="btn btn-dark btn-lg btn-block">
