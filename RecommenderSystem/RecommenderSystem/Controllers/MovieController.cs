@@ -38,7 +38,7 @@ namespace RecommenderSystem.Controllers
 
         [HttpPatch]
         [Route("UpdateMovie/{id}")]
-        public async Task<Movie> UpdateStudent(Movie objMovie)
+        public async Task<Movie> UpdateMovie(Movie objMovie)
         {
             // update movie
             _movieDbContext.Entry(objMovie).State = EntityState.Modified;
