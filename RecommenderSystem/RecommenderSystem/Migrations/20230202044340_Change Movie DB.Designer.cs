@@ -12,8 +12,8 @@ using RecommenderSystem.Data;
 namespace RecommenderSystem.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20230129023234_Add Movie Table")]
-    partial class AddMovieTable
+    [Migration("20230202044340_Change Movie DB")]
+    partial class ChangeMovieDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -237,11 +237,8 @@ namespace RecommenderSystem.Migrations
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PosterId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Rating")
-                        .HasColumnType("int");
+                    b.Property<decimal?>("Rating")
+                        .HasColumnType("decimal(19,2)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");

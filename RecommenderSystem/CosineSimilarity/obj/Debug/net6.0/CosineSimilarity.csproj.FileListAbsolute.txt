@@ -13,3 +13,18 @@ C:\Users\izzat\Desktop\CosineSimilarity\obj\Debug\net6.0\refint\CosineSimilarity
 C:\Users\izzat\Desktop\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.pdb
 C:\Users\izzat\Desktop\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.genruntimeconfig.cache
 C:\Users\izzat\Desktop\CosineSimilarity\obj\Debug\net6.0\ref\CosineSimilarity.dll
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\bin\Debug\net6.0\CosineSimilarity.exe
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\bin\Debug\net6.0\CosineSimilarity.deps.json
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\bin\Debug\net6.0\CosineSimilarity.runtimeconfig.json
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\bin\Debug\net6.0\CosineSimilarity.dll
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\bin\Debug\net6.0\CosineSimilarity.pdb
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.csproj.AssemblyReference.cache
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.AssemblyInfoInputs.cache
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.AssemblyInfo.cs
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.csproj.CoreCompileInputs.cache
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.dll
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\refint\CosineSimilarity.dll
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.pdb
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\CosineSimilarity.genruntimeconfig.cache
+C:\Users\izzat\Desktop\Capstone Project\RecommenderSystem\CosineSimilarity\obj\Debug\net6.0\ref\CosineSimilarity.dll

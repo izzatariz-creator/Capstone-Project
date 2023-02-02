@@ -1,21 +1,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { NavigationBar } from "./NavigationBar";
+import DeleteConfirmationModal from "./DeleteConfirmationModal";
 
 export const MovieManagement = () => {
     const [movies, setMovies] = useState([]);
     const [title, setTitle] = useState([]);
     const [description, setDescription] = useState([]);
     const [rating, setRating] = useState([]);
-    const [posterId, setPosterId] = useState([]);
     const [genre, setGenre] = useState([]);
     const [movieId, setMovieId] = useState([]);
     const api = "https://localhost:7074/api/Movie/GetMovies";
     const apiadd = "https://localhost:7074/api/Movie/AddMovie";
-
-    const navigate = useNavigate();
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleDelete = () => setShowModal(false);
 
     // load all data
     useEffect(() => {
@@ -60,24 +61,13 @@ export const MovieManagement = () => {
             errormessage += " Rating";
         }
 
-        if (posterId === null || posterId === "") {
-            isproceed = false;
-            errormessage += " PosterId";
-        }
-
         if (!isproceed) {
             toast.warning(errormessage);
         } else {
-            if (/^[0-9]{0,10}$/.test(rating)) {
+            if (/^(10(\.0{1,2})?|[0-9](\.[0-9]{1,2})?)$/.test(rating)) {
             } else {
                 isproceed = false;
                 toast.warning("Please enter the valid rating (0-10)");
-            }
-
-            if (/^\d+$/.test(posterId)) {
-            } else {
-                isproceed = false;
-                toast.warning("Please enter the valid Poster Id");
             }
         }
         return isproceed;
@@ -94,14 +84,13 @@ export const MovieManagement = () => {
                     description: description,
                     genre: genre,
                     rating: rating,
-                    posterId: posterId,
                 })
                 .then((res) => {
                     toast.success("Movie added successfully");
                     Load();
                 })
                 .catch((err) => {
-                    toast.error("Add failed" + err.message);
+                    toast.error("Please enter all required fields");
                 });
         }
     }
@@ -113,30 +102,6 @@ export const MovieManagement = () => {
         setMovieId(movie.movieId);
         setGenre(movie.genre);
         setRating(movie.rating);
-        setPosterId(movie.posterId);
-    }
-
-    // function to delete movie
-    async function deleteMovie(id) {
-        if (window.confirm("Are you sure you want to delete this movie?")) {
-            await axios
-                .delete("https://localhost:7074/api/Movie/DeleteMovie/" + id)
-                .then((res) => {
-                    toast.success("Movie deleted successfully");
-                    Load();
-                })
-                .catch((err) => {
-                    toast.error("Delete failed" + err.message);
-                });
-
-            setTitle("");
-            setDescription("");
-            setMovieId("");
-            setGenre("");
-            setRating("");
-            setPosterId("");
-            Load();
-        }
     }
 
     // function to reset value inside form
@@ -146,7 +111,6 @@ export const MovieManagement = () => {
         setMovieId("");
         setGenre("");
         setRating("");
-        setPosterId("");
     }
 
     // function to update movie
@@ -160,7 +124,6 @@ export const MovieManagement = () => {
                     description: description,
                     genre: genre,
                     rating: rating,
-                    posterId: posterId,
                     movieId: movieId,
                 })
                 .then((res) => {
@@ -168,7 +131,7 @@ export const MovieManagement = () => {
                     Load();
                 })
                 .catch((err) => {
-                    toast.error("Login failed" + err.message);
+                    toast.error("Please enter all required fields");
                 });
         }
     }
@@ -211,28 +174,39 @@ export const MovieManagement = () => {
                                         <input value={description} onChange={(e) => setDescription(e.target.value)} className="form-control" id="description"></input>
                                     </div>
                                 </div>
-                                <div className="col-lg-6">
+                                {/* <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>
                                             Genre <span className="errmsg">*</span>
                                         </label>
                                         <input value={genre} onChange={(e) => setGenre(e.target.value)} className="form-control" id="genre"></input>
                                     </div>
+                                </div> */}
+
+                                <div className="col-lg-6">
+                                    <div className="form-group">
+                                        <label>
+                                            Genre <span className="errmsg">*</span>
+                                        </label>
+                                        <select value={genre} onChange={(e) => setGenre(e.target.value)} className="form-control" id="genre">
+                                            <option value="" disabled>
+                                                Select genre
+                                            </option>
+                                            <option value="Action">Action</option>
+                                            <option value="Comedy">Comedy</option>
+                                            <option value="Drama">Drama</option>
+                                            <option value="Horror">Horror</option>
+                                            <option value="Romance">Romance</option>
+                                        </select>
+                                    </div>
                                 </div>
+
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>
                                             Rating <span className="errmsg">*</span>
                                         </label>
                                         <input value={rating} onChange={(e) => setRating(e.target.value)} className="form-control" id="rating"></input>
-                                    </div>
-                                </div>
-                                <div className="col-lg-6">
-                                    <div className="form-group">
-                                        <label>
-                                            Poster Id <span className="errmsg">*</span>
-                                        </label>
-                                        <input value={posterId} onChange={(e) => setPosterId(e.target.value)} className="form-control" id="posterId"></input>
                                     </div>
                                 </div>
                                 <div>
@@ -256,57 +230,60 @@ export const MovieManagement = () => {
 
             <br></br>
 
-            <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-                <h1>All Movies</h1>
-                <br></br>
-            </div>
+            <div className="movieManagement">
+                <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+                    <h1>All Movies</h1>
+                    <br></br>
+                </div>
 
-            <table className="table">
-                <thead className="table-dark">
-                    <tr>
-                        <th scope="col" style={{ width: "5%" }}>
-                            ID
-                        </th>
-                        <th scope="col" style={{ width: "25%" }}>
-                            Title
-                        </th>
-                        <th scope="col" style={{ width: "30%" }}>
-                            Description
-                        </th>
-                        <th scope="col">Genre</th>
-                        <th scope="col">Rating</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {movies.map((movie) => (
-                        <tr key={movie.movieId}>
-                            <td>{movie.movieId}</td>
-                            <td>{movie.title}</td>
-                            <td>{movie.description}</td>
-                            <td>{movie.genre}</td>
-                            <td>{movie.rating}</td>
-                            <td>
-                                <button type="button" className="btn btn-warning" onClick={() => editMovie(movie)}>
-                                    Edit
-                                </button>
-                                &nbsp; &nbsp;
-                                <button type="button" className="btn btn-danger" onClick={() => deleteMovie(movie.movieId)}>
-                                    Delete
-                                </button>
-                            </td>
+                <table className="table">
+                    <thead className="table-dark">
+                        <tr>
+                            <th scope="col" style={{ width: "5%" }}>
+                                ID
+                            </th>
+                            <th scope="col" style={{ width: "25%" }}>
+                                Title
+                            </th>
+                            <th scope="col" style={{ width: "30%" }}>
+                                Description
+                            </th>
+                            <th scope="col" style={{ width: "10%" }}>
+                                Genre
+                            </th>
+                            <th scope="col" style={{ width: "10%" }}>
+                                Rating
+                            </th>
+                            <th scope="col">Actions</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody className="dashboard">
+                        {movies.map((movie) => (
+                            <tr key={movie.movieId}>
+                                <td>{movie.movieId}</td>
+                                <td>{movie.title}</td>
+                                <td>{movie.description}</td>
+                                <td>{movie.genre}</td>
+                                <td>{movie.rating}</td>
+                                <td>
+                                    <button type="button" className="btn btn-warning" onClick={() => editMovie(movie)} style={{ background: "yellow" }}>
+                                        Edit
+                                    </button>
+                                    <DeleteConfirmationModal id={movie.movieId} show={showModal} onClose={handleClose} onDelete={handleDelete} />
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
 
-            <div className="d-flex flex-column align-items-center justify-content-center mt-5 mb-5">
-                <br></br>
-                <Link to="/admindashboard">
-                    <button type="button" class="btn btn-dark btn-lg btn-block">
-                        Admin Dashboard
-                    </button>
-                </Link>
+                <div className="d-flex flex-column align-items-center justify-content-center mt-5 mb-5">
+                    <br></br>
+                    <Link to="/admindashboard">
+                        <button type="button" className="btn btn-dark btn-lg btn-block" style={{ width: "250px" }}>
+                            Admin Dashboard
+                        </button>
+                    </Link>
+                </div>
             </div>
         </>
     );

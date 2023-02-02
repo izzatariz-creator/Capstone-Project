@@ -11,10 +11,10 @@
     --main: #3d3d3d;
     --second: #1e1d1d;
     --third: #343434;
+    --darkok: #121212;
 }
 
 body {
-    background-color: black;
     margin: 0;
 }
 
@@ -25,7 +25,7 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     padding-top: 1.25rem;
-    /* background-color: var(--main); */
+    background-color: var(--darkok);
 }
 
 .errmsg {
@@ -75,7 +75,7 @@ body {
 
 .info {
     color: #fff;
-    padding: 1rem;
+    padding: 1rem 0 1rem 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -102,7 +102,7 @@ body {
     left: 0;
     letter-spacing: 0.5px;
     max-height: 100%;
-    padding: 20px;
+    padding: 20px 20px 0px 20px;
     position: absolute;
     right: 0;
     transform: translateY(101%);
@@ -167,7 +167,7 @@ nav .logo span {
 nav .nav-items {
     display: flex;
     flex: 1;
-    padding: 0 0 0 40px;
+    padding: 0 0 0 10px;
 }
 
 nav .nav-items li {
@@ -322,6 +322,33 @@ table {
 
 /* ------------------ Navigation Bar End ------------------ */
 
-/* ------------------ Form Start ------------------ */
+.formDesign {
+    background-color: #121212;
+}
 
-/* ------------------ Form End ------------------ */
+.BackDark {
+    background-color: #121212;
+}
+
+.dashboard {
+    color: white;
+}
+
+.dashboard .btn {
+    background: #1e1d1d;
+    width: 350px;
+}
+
+.movieManagement {
+    color: white;
+}
+
+.movieManagement .btn {
+    width: 130px;
+    margin: 5px 0px 5px 0;
+}
+
+.pageTitle {
+    color: white;
+    padding: 3rem 0 0 7rem;
+}

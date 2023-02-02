@@ -8,9 +8,9 @@ namespace RecommenderSystem.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]    
         public int MovieId { get; set; }
         public string? Title { get; set; }
-        public int? PosterId { get; set; }
         public string? Genre { get; set; }
         public string? Description { get; set; }
-        public int? Rating { get; set; }
+        [Column(TypeName = "decimal(19,2)")]
+        public decimal? Rating { get; set; }
     }
 }

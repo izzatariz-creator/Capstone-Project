@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\izzat\\Desktop\\CosineSimilarity\\CosineSimilarity.csproj": {}
+    "C:\\Users\\izzat\\Desktop\\Capstone Project\\RecommenderSystem\\CosineSimilarity\\CosineSimilarity.csproj": {}
   },
   "projects": {
-    "C:\\Users\\izzat\\Desktop\\CosineSimilarity\\CosineSimilarity.csproj": {
+    "C:\\Users\\izzat\\Desktop\\Capstone Project\\RecommenderSystem\\CosineSimilarity\\CosineSimilarity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\izzat\\Desktop\\CosineSimilarity\\CosineSimilarity.csproj",
+        "projectUniqueName": "C:\\Users\\izzat\\Desktop\\Capstone Project\\RecommenderSystem\\CosineSimilarity\\CosineSimilarity.csproj",
         "projectName": "CosineSimilarity",
-        "projectPath": "C:\\Users\\izzat\\Desktop\\CosineSimilarity\\CosineSimilarity.csproj",
+        "projectPath": "C:\\Users\\izzat\\Desktop\\Capstone Project\\RecommenderSystem\\CosineSimilarity\\CosineSimilarity.csproj",
         "packagesPath": "C:\\Users\\izzat\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\izzat\\Desktop\\CosineSimilarity\\obj\\",
+        "outputPath": "C:\\Users\\izzat\\Desktop\\Capstone Project\\RecommenderSystem\\CosineSimilarity\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\izzat\\AppData\\Roaming\\NuGet\\NuGet.Config",

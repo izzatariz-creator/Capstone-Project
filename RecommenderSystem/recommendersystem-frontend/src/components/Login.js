@@ -48,7 +48,7 @@ export const Login = () => {
                     }
                 })
                 .catch((err) => {
-                    toast.error("Login failed, invalid credentials");
+                    toast.error("Wrong User Name or Password");
                 });
         }
     };
@@ -70,7 +70,7 @@ export const Login = () => {
     return (
         <>
             <NavigationBar />
-            <div className="row">
+            <div className="formDesign">
                 <div className="offset-lg-3 col-lg-6" style={{ marginTop: "100px" }}>
                     <form onSubmit={ProceedLoginusingAPI} className="container">
                         <div className="card">
@@ -80,7 +80,7 @@ export const Login = () => {
                             <div className="card-body">
                                 <div className="form-group">
                                     <label>
-                                        User Name <span className="errmsg">*</span>
+                                        Username <span className="errmsg">*</span>
                                     </label>
                                     <input value={username} onChange={(e) => setUsername(e.target.value)} className="form-control"></input>
                                 </div>
@@ -96,8 +96,8 @@ export const Login = () => {
                                     Login
                                 </button>{" "}
                                 &nbsp; &nbsp;
-                                <Link className="btn btn-dark" to={"/register"}>
-                                    New User
+                                <Link className="btn btn-dark" to={"/register"} style={{ float: "right" }}>
+                                    Register Here
                                 </Link>
                             </div>
                         </div>

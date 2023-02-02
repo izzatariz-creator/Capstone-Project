@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PQyZ213DltoI7ivdeV9ekY9qeJG+lJV/UHUe9n/22lzq4jCMSTXjgjJ7yJbpjfl5FaTx/IthBA2mww64cY1eJw==",
+  "dgSpecHash": "1d+4kPQ4bX5R8XxFEh9snoocIoDRAg5rliFN+UoHmIDzjI3MUbLMR97VkhOTD+7fHvq9EZf2tktw63YNAk12DQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\izzat\\Desktop\\CosineSimilarity\\CosineSimilarity.csproj",
+  "projectFilePath": "C:\\Users\\izzat\\Desktop\\Capstone Project\\RecommenderSystem\\CosineSimilarity\\CosineSimilarity.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

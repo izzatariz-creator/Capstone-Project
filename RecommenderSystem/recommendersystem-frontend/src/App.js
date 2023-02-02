@@ -9,21 +9,23 @@ import { AddUser } from "./components/AddUser";
 import { AddAdmin } from "./components/AddAdmin";
 import { AllUser } from "./components/AllUser";
 import { MovieManagement } from "./components/MovieManagement";
+import MovieDetail from "./components/MovieDetail/MovieDetail";
 
 function App() {
     return (
-        <div className="App">
+        <div className="BackDark">
             <ToastContainer theme="colored"></ToastContainer>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/register" element={<Register />}></Route>
+                    <Route path="movie/:id" element={<MovieDetail />}></Route>
                     <Route path="/admindashboard" element={<AdminDashboard />}></Route>
                     <Route path="/adduser" element={<AddUser />}></Route>
                     <Route path="/addadmin" element={<AddAdmin />}></Route>
                     <Route path="/alluser" element={<AllUser />}></Route>
-                    <Route path="/movie" element={<MovieManagement />}></Route>
+                    <Route path="/moviemanagement" element={<MovieManagement />}></Route>
                 </Routes>
             </BrowserRouter>
         </div>

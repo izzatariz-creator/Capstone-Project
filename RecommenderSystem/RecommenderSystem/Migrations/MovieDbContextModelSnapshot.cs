@@ -234,11 +234,8 @@ namespace RecommenderSystem.Migrations
                     b.Property<string>("Genre")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PosterId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Rating")
-                        .HasColumnType("int");
+                    b.Property<decimal?>("Rating")
+                        .HasColumnType("decimal(19,2)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");

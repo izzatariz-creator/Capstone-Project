@@ -41,6 +41,12 @@ export const AddUser = () => {
                 isproceed = false;
                 toast.warning("Please enter the valid email");
             }
+
+            if (/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^\w\d])[A-Za-z\d!@#$%^&*()_+,-./:;<=>?@[\]^_`{|}~]{6,}$/.test(password)) {
+            } else {
+                isproceed = false;
+                toast.warning("Password must contain an uppercase character, lowercase character, a digit, and a non-alphanumeric character. Passwords must be at least six characters long.");
+            }
         }
         return isproceed;
     };
@@ -61,7 +67,7 @@ export const AddUser = () => {
                     navigate("/admindashboard");
                 })
                 .catch((err) => {
-                    toast.error("Login failed + err.message");
+                    toast.error("Login failed, the username could be taken: " + err.message);
                 });
         }
     };
@@ -82,7 +88,7 @@ export const AddUser = () => {
                                     <div className="col-lg-6">
                                         <div className="form-group">
                                             <label>
-                                                User Name <span className="errmsg">*</span>
+                                                Username <span className="errmsg">*</span>
                                             </label>
                                             <input value={username} onChange={(e) => setUsername(e.target.value)} className="form-control"></input>
                                         </div>
@@ -110,7 +116,7 @@ export const AddUser = () => {
                                     Submit
                                 </button>
                                 &nbsp; &nbsp;
-                                <Link className="btn btn-dark" to={"/admindashboard"}>
+                                <Link className="btn btn-dark" style={{ float: "right" }} to={"/admindashboard"}>
                                     Back
                                 </Link>
                             </div>
