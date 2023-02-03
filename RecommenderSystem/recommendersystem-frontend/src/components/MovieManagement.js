@@ -174,15 +174,6 @@ export const MovieManagement = () => {
                                         <input value={description} onChange={(e) => setDescription(e.target.value)} className="form-control" id="description"></input>
                                     </div>
                                 </div>
-                                {/* <div className="col-lg-6">
-                                    <div className="form-group">
-                                        <label>
-                                            Genre <span className="errmsg">*</span>
-                                        </label>
-                                        <input value={genre} onChange={(e) => setGenre(e.target.value)} className="form-control" id="genre"></input>
-                                    </div>
-                                </div> */}
-
                                 <div className="col-lg-6">
                                     <div className="form-group">
                                         <label>

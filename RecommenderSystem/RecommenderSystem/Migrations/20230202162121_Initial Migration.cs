@@ -59,8 +59,7 @@ namespace RecommenderSystem.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Rating = table.Column<decimal>(type: "decimal(19,2)", nullable: true),
-                    PosterPath = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Rating = table.Column<decimal>(type: "decimal(19,2)", nullable: true)
                 },
                 constraints: table =>
                 {

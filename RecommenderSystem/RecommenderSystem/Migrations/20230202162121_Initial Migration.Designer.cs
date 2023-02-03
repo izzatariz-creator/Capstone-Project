@@ -12,7 +12,7 @@ using RecommenderSystem.Data;
 namespace RecommenderSystem.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20230201184400_Initial Migration")]
+    [Migration("20230202162121_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -235,9 +235,6 @@ namespace RecommenderSystem.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Genre")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PosterPath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal?>("Rating")

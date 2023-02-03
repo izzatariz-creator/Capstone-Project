@@ -23,10 +23,6 @@ const DeleteConfirmationModal = ({ id, onClose, onDelete }) => {
 
     return (
         <>
-            {/* <Button variant="danger" onClick={() => setShow(true)}>
-                Delete
-            </Button> */}
-
             <button type="button" className="btn btn-warning" onClick={() => setShow(true)} style={{ background: "red" }}>
                 Delete
             </button>

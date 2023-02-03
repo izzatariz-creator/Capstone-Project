@@ -53,7 +53,7 @@ export const AllUser = () => {
                 <div className="d-flex flex-column align-items-center justify-content-center mt-5">
                     <br></br>
                     <Link to="/admindashboard">
-                        <button type="button" class="btn btn-dark btn-lg btn-block">
+                        <button type="button" className="btn btn-dark btn-lg btn-block">
                             Admin Dashboard
                         </button>
                     </Link>

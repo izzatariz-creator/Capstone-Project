@@ -352,3 +352,22 @@ table {
     color: white;
     padding: 3rem 0 0 7rem;
 }
+
+.pagination {
+    display: inline-block;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagination button {
+    margin-top: 20px;
+    margin-left: 10px;
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+}

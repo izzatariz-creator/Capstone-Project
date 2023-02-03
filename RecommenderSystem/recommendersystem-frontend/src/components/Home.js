@@ -8,7 +8,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 const BASE_URL = "https://api.themoviedb.org/3/";
 const API_KEY = "api_key=9bf3ce744d5c5df6ca18c4875bbb36f2";
-const POPULARMOVIE_URL = BASE_URL + "/discover/movie?sort_by=popularity.desc&" + API_KEY;
 const SEARCH_URL = BASE_URL + "/search/movie?" + API_KEY;
 const API_IMG = "https://image.tmdb.org/t/p/w500/";
 
@@ -64,20 +63,28 @@ export const Home = () => {
     const [movies, setMovies] = useState([]);
     const [query, setQuery] = useState([]);
 
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
+
     //using axios to fetch movie from api
     useEffect(() => {
         const fetchMovies = async () => {
-            const { data } = await axios.get(POPULARMOVIE_URL);
+            const { data } = await axios.get(`https://api.themoviedb.org/3/movie/popular?${API_KEY}&language=en-US&include_adult=false&page=${page}`);
             setMovies(data.results);
-            console.log(data.results);
+            setTotalPages(data.total_pages);
+            // console.log(data.results);
         };
 
+        window.scrollTo(0, 0);
+
         fetchMovies();
-    }, []);
+    }, [page]);
 
     //Function to search movie
     const searchMovie = async (e) => {
         e.preventDefault();
+
+        // setPage(1);
 
         if (query.length > 0) {
             try {
@@ -91,7 +98,8 @@ export const Home = () => {
             }
         } else {
             const fetchMovies = async () => {
-                const { data } = await axios.get(POPULARMOVIE_URL);
+                setPage(1);
+                const { data } = await axios.get(`https://api.themoviedb.org/3/movie/popular?${API_KEY}&language=en-US&include_adult=false&page=${page}`);
                 setMovies(data.results);
             };
 
@@ -120,8 +128,17 @@ export const Home = () => {
                         ))}
                     </div>
                 ) : (
-                    <div className="movieList">{/* <p className="warning">Sorry! No Movies Found</p> */}</div>
+                    <div className="movieList">{<p className="warning">Sorry! No Movies Found</p>}</div>
                 )}
+            </div>
+
+            <div className="pagination center">
+                <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+                    Previous
+                </button>
+                <button disabled={page === totalPages} onClick={() => setPage(page + 1)}>
+                    Next
+                </button>
             </div>
 
             <br></br>
